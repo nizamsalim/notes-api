@@ -5,9 +5,11 @@ Base url : http://127.0.0.1:8000 (Development server)
 
 ---
 
-## SIGNUP
+---
 
-**POST /auth/signup**
+## **SIGNUP**
+
+POST **`/auth/signup`**
 
 ### Expected data format
 
@@ -26,10 +28,10 @@ Base url : http://127.0.0.1:8000 (Development server)
 ```
 {
     success:true,
-    authToken:eurhfbweurygfwnyergfwyrf86woermyg,
+    authToken:'eurhfbweurygfwnyergfwyrf86woermyg',
     user:{
         name:"John Doe",
-        username:"john_doe"
+        username:"john_doe",
         phone:"9999999999",
         email:"johndoe@example.com",
     }
@@ -41,6 +43,47 @@ Base url : http://127.0.0.1:8000 (Development server)
 ```
 {
     success:false,
-
+    error:"error message"
 }
 ```
+
+---
+
+## **LOGIN**
+
+POST **`/auth/login`**
+
+### Expected data format
+
+```
+{
+    email:"johndoe@example.com",
+    password:"johndoe123"
+}
+```
+
+### Success response
+
+```
+{
+    success:true,
+    authToken:'eurhfbweurygfwnyergfwyrf86woermyg',
+    user:{
+        name:"John Doe",
+        username:"john_doe",
+        phone:"9999999999",
+        email:"johndoe@example.com",
+    }
+}
+```
+
+### Failure response
+
+```
+{
+    success:false,
+    error:"error message"
+}
+```
+
+---

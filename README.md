@@ -1,9 +1,12 @@
 # How to run API on localhost
 
 1. Clone this github repository to your system
-2. In command prompt, type `npm install`  
+2. In command prompt, type `npm install`
+   in the project directory.  
    This will install all dependencies
 3. Type `npm run start` to start the server on localhost. It will run on port "8000"
+
+---
 
 # How to update changes
 
