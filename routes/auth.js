@@ -78,4 +78,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// ROUTE 3 - ALL USERS - (Temporary)
+// GET /auth/signup
+router.get("/users", async (req, res) => {
+  let users = await User.find();
+  res.json({ success: true, users });
+});
+
 module.exports = router;
