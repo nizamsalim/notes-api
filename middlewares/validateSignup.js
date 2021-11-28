@@ -3,7 +3,7 @@ const User = require("../models/User");
 const validateSignup = async (req, res, next) => {
   const { name, username, phone, email, password } = req.body;
   if (!name || !username || !phone || !email || !password) {
-    return res.status(400).json({ success: false, error: "Invalid inputs" });
+    return res.json({ success: false, error: "Invalid inputs" });
   }
   // validation checks
   const usernameExists = await User.findOne({ username: username });
@@ -23,30 +23,54 @@ const validateSignup = async (req, res, next) => {
   }
 
   if (usernameExists) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Username is already taken" });
+    return res.json({
+      success: false,
+      error: {
+        status: 400,
+        code: "val/un-tkn",
+        message: "Username is already taken",
+      },
+    });
   }
   if (emailExists) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Email is already taken" });
+    return res.json({
+      success: false,
+      error: {
+        status: 400,
+        code: "val/em-ex",
+        message: "Email already exists",
+      },
+    });
   }
   if (!emailIsValid) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Email is not valid" });
+    return res.json({
+      success: false,
+      error: {
+        status: 400,
+        code: "val/em-inv",
+        message: "Email is invalid",
+      },
+    });
   }
   if (!passwordIsValid) {
-    return res.status(400).json({
+    return res.json({
       success: false,
-      error: "Password should contain more than 6 characters",
+      error: {
+        status: 400,
+        code: "val/pwd-len",
+        message: "Password should be atleast 6 characters long",
+      },
     });
   }
   if (!phoneIsValid) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Phone number is not valid" });
+    return res.json({
+      success: false,
+      error: {
+        status: 400,
+        code: "val/ph-inv",
+        message: "Phone is in invalid format",
+      },
+    });
   }
   next();
 };
